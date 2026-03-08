@@ -1,0 +1,27 @@
+name: Deploy to GitHub Pages
+# This workflow will deploy the contents of the 'mysimpleweb' directory to GitHub Pages whenever there is a push to the 'main' branch.
+on:
+  push:
+    branches:
+      - main
+# The 'deploy' job will run on the latest version of Ubuntu. It has permissions to write to contents, pages, and id-token.
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+        contents: write
+        pages: write
+        id-token: write
+# The steps to deploy to GitHub Pages include checking out the repository and using the 'peaceiris/actions-gh-pages' action to publish the contents of the 'mysimpleweb' directory.
+    steps:
+      - name: Checkout repository  
+        uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+    #   uses the 'peaceiris/actions-gh-pages' action to publish the contents of the 'mysimpleweb' directory to GitHub Pages. It uses the GITHUB_TOKEN for authentication.
+        uses: peaceiris/actions-gh-pages@v4
+    #  token: ${{ secrets.GITHUB_TOKEN }} is used for authentication, and publish_dir specifies the directory to be published.
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+      
